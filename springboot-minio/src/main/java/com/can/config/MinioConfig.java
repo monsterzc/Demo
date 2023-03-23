@@ -1,7 +1,9 @@
 package com.can.config;
 
+import io.minio.MinioClient;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -38,4 +40,14 @@ public class MinioConfig {
      */
     @Value("${minio.bucketName}")
     private String bucketName;
+
+
+
+    @Bean
+    public MinioClient minioClient(){
+        return MinioClient.builder()
+                .endpoint(endpoint)
+                .credentials(accessKey, secretKey)
+                .build();
+    }
 }

@@ -1,0 +1,19 @@
+#minio:endpoint: http://localhost:9001
+#  accessKey: root
+  # secretKey: root1234
+  # bucketName: weiz-test
+spring:
+  servlet:
+    multipart:
+      max-request-size: 200MB
+      max-file-size: 200MB
+
+#  endpoint: http://localhost:9001
+#  accessKey: miniouser
+#  secretKey: miniouser
+#  bucketName: public
+minio:
+  endpoint: http://localhost:9000
+  accessKey: BV0QiINMOIBTZTNT
+  secretKey: QxoYnivnX3vnfmg3waoWzVx5bl09WDL6
+  bucketName: public

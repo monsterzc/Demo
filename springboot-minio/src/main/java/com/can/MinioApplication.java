@@ -1,7 +1,19 @@
-package com.can;/**
+package com.can;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
  * @className: MinioApplication
- * @description: TODO 类描述 
+ * @description: 启动类
  * @author: zhengcan
- * @date:  2023/3/23
- **/public class MinioApplication {
+ * @date: 2023/3/23
+ **/
+
+@SpringBootApplication
+public class MinioApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MinioApplication.class,args);
+    }
 }
