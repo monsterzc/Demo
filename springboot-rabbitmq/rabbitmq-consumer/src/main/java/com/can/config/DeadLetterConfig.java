@@ -25,7 +25,7 @@ public class DeadLetterConfig {
      */
     @Bean
     public Queue businessQueueA(){
-        Map<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>(2);
         // x-dead-letter-exchange： 这里声明当前业务队列绑定的死信队列交换机
         args.put("x-dead-letter-exchange",Constant.DEAD_LETTER_EXCHANGE);
         // x-dead-letter-routing-key: 这里声明当前业务队列绑定的死信路由key
@@ -39,7 +39,7 @@ public class DeadLetterConfig {
      */
     @Bean
     public Queue businessQueueB(){
-        Map<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>(2);
         // x-dead-letter-exchange： 这里声明当前业务队列绑定的死信队列交换机
         args.put("x-dead-letter-exchange",Constant.DEAD_LETTER_EXCHANGE);
         // x-dead-letter-routing-key：这里声明当前业务队列绑定的死信路由key
@@ -58,7 +58,6 @@ public class DeadLetterConfig {
     /**
      * 业务队列A与交换机绑定，并指定routing key
      *
-     * @return
      */
     @Bean
     Binding businessBindingA(){
@@ -68,7 +67,6 @@ public class DeadLetterConfig {
     /**
      * 业务队列A与交换机绑定，并指定routing key
      *
-     * @return
      */
     @Bean
     Binding businessBindingB(){
@@ -102,7 +100,6 @@ public class DeadLetterConfig {
 
     /**
      * 死信队列A与交换机进行绑定并指定routing key
-     * @return
      */
     @Bean
     BindingBuilder.GenericArgumentsConfigurer deadLetterBindingA(){
@@ -111,7 +108,6 @@ public class DeadLetterConfig {
 
     /**
      * 死信队列B与交换机进行绑定并指定routing key
-     * @return
      */
     @Bean
     BindingBuilder.GenericArgumentsConfigurer deadLetterBindingB(){
