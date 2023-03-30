@@ -5,16 +5,16 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.10</version>
+        <version>2.7.11-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.can</groupId>
-    <artifactId>springboot-minio</artifactId>
+    <artifactId>rabbitmq-consumer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot-minio</name>
-    <description>springboot-minio</description>
+    <name>rabbitmq-consumer</name>
+    <description>rabbitmq-consumer</description>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>8</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -22,12 +22,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -40,24 +34,8 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-test</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.minio</groupId>
-            <artifactId>minio</artifactId>
-            <version>8.2.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.11</version>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+            <version>2.7.11-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

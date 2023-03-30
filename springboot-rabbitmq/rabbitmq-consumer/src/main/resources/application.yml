@@ -1,0 +1,20 @@
+server:
+  port: 8022
+spring:
+  application:
+    name: rabbitmq-consumer
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: root
+    #虚拟host 可以不设置,使用server默认host
+    virtual-host: canHost
+
+    listener:
+      type: simple
+      # 消费方消息确认：手动确认
+      simple:
+        acknowledge-mode: manual
+        default-requeue-rejected: false
+
