@@ -23,7 +23,7 @@ public class DeadLetterRabbitConfig {
 
     public static final String EXCHANGE = "exchange";
 
-    public static final String QUEUE = "queue";
+    public static final String QUEUE = "delayQueue";
 
     public static final String ROUTING_KEY = "routingKey";
 

@@ -1,7 +1,9 @@
 package com.can.controller;
 
 import com.can.config.DeadLetterRabbitConfig;
+import com.can.config.DelayRabbitMq;
 import com.can.constant.Constant;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -19,6 +22,7 @@ import java.util.UUID;
  * @author: zhengcan
  * @date: 2023/3/30
  **/
+@Slf4j
 @RestController
 //@RequestMapping("/send")
 public class SendMessageController {
@@ -147,5 +151,33 @@ public class SendMessageController {
         //将消息主题：topic.man 发送到交换机TestDirectExchange
         rabbitTemplate.convertAndSend(DeadLetterRabbitConfig.EXCHANGE,DeadLetterRabbitConfig.ROUTING_KEY,map);
         return "发送成功";
+    }
+
+    @GetMapping("/sendDelayMessage")
+    public String sendDelayMessage(Integer delayTime){
+        String messageId = String.valueOf(UUID.randomUUID());
+        String messageData = "message:delay.exchange test message";
+        String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        HashMap<String, Object> map = new HashMap<>(4);
+        map.put("messageId", messageId);
+        map.put("messageData", messageData);
+        map.put("createTime", createTime);
+        map.put("type", "延时队列测试");
+        // 将主题消息发送到延时队列交换机
+        rabbitTemplate.convertAndSend(DelayRabbitMq.DELAY_EXCHANGE,DelayRabbitMq.DELAY_ROUTING_KEY_A,map,msg->{
+            msg.getMessageProperties().setDelay(delayTime);
+            return msg;
+        });
+        return "发送成功";
+    }
+
+
+    @GetMapping("delayMsg")
+    public void delayMsg(String msg, Integer delayTime) {
+        log.info("当前时间：{},收到请求，msg:{},delayTime:{}", new Date(), msg, delayTime);
+        rabbitTemplate.convertAndSend(DelayRabbitMq.DELAY_EXCHANGE,DelayRabbitMq.DELAY_ROUTING_KEY_B,msg,a->{
+            a.getMessageProperties().setDelay(delayTime);
+            return a;
+        });
     }
 }

@@ -24,7 +24,7 @@ import java.util.Map;
  * @date: 2023/3/30
  **/
 @Slf4j
-@Component
+//@Component
 public class DeadLetterReceiver {
 
     @RabbitListener(queues = "dead.letter.deadletter.queuea")
